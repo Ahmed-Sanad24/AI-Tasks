@@ -1,29 +1,21 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[53]:
-
 
 #importing libraries
 import pandas as pd
 import numpy as np
 
 
-# In[54]:
-
 
 #importing data file 
 dataset = pd.read_csv("diabetes.csv")
 
 
-# In[55]:
-
 
 #showing the data
 dataset.head()
 
-
-# In[56]:
 
 
 dbts_feats = ["Pregnancies", "Glucose", "BloodPressure", "SkinThickness", "Insulin", "BMI", "DiabetesPedigreeFunction","Age"]
@@ -34,16 +26,12 @@ y = dataset[dbts_op]
 X.head()
 
 
-# In[57]:
 
 
 # outcome coulomn
 y.head()
 
 
-# split the data into 4 categories
-
-# In[58]:
 
 
 #splitting the data to train and test , x and y 
@@ -51,7 +39,6 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state = 0, test_size=0.2)
 
 
-# In[59]:
 
 
 #handling the missing values using imputer
@@ -64,7 +51,6 @@ imputed_X_train.columns = X_train.columns
 imputed_X_test.columns = X_test.columns
 
 
-# In[62]:
 
 
 # **Random forest model**
@@ -76,7 +62,6 @@ random_forest_error = mean_absolute_error(y_test, X_validation_forest)
 print(random_forest_error)
 
 
-# In[63]:
 
 
 # **Logistic regression model**
@@ -87,8 +72,6 @@ X_validation_logistic = logistic_model.predict(imputed_X_test)
 logistic_error = mean_absolute_error(y_test, X_validation_logistic)
 print(logistic_error)
 
-
-# In[60]:
 
 
 # fit the **decision tree model** with the data 
@@ -103,8 +86,6 @@ decision_tree_error = mean_absolute_error( y_test ,X_validation)
 print(decision_tree_error)
 
 
-# In[64]:
-
 
 # **KNN model**
 from sklearn.preprocessing import StandardScaler
@@ -117,7 +98,6 @@ imputed_X_train = X_scale.fit_transform(imputed_X_train)
 imputed_X_test = X_scale.transform(imputed_X_test)
 
 
-# In[65]:
 
 
 # using matrices to understand data
@@ -127,21 +107,19 @@ KNN_model.fit(imputed_X_train, y_train.values.ravel())
 X_validation_KNN = KNN_model.predict(imputed_X_test)
 
 
-# In[66]:
 
 
 # confusion matrix to show the errors
-cm = confusion_matrix(y_test, X_validation_KNN)
-print(cm)
+c_m = confusion_matrix(y_test, X_validation_KNN)
+print(c_m)
 
 
-# In[67]:
 
 
-print(f"the f1 score for KNN method is {f1_score(y_test, X_validation_KNN)}")
-print(f"the accuracy for KNN method is {accuracy_score(y_test, X_validation_KNN)} ")
-print(f"the f1 score for decision tree method is {f1_score(y_test, X_validation)}")
-print(f"the accuracy for decision tree method is {accuracy_score(y_test, X_validation)} ")
-print(f"the f1 score for logistic regression method is {f1_score(y_test, X_validation_logistic)}")
-print(f"the accuracy for logistic regression method is {accuracy_score(y_test, X_validation_logistic)} ")
+print(f" KNN method with f1 score is {f1_score(y_test, X_validation_KNN)}")
+print(f" KNN method's accuracy is {accuracy_score(y_test, X_validation_KNN)} ")
+print(f" Decision tree method with f1 score is {f1_score(y_test, X_validation)}")
+print(f" Decision tree method's accuracy is {accuracy_score(y_test, X_validation)} ")
+print(f" Logistic regression method with f1 score is {f1_score(y_test, X_validation_logistic)}")
+print(f" Logistic regression method's accuracy is {accuracy_score(y_test, X_validation_logistic)} ")
 
