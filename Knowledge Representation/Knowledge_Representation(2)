@@ -1,0 +1,22 @@
+import aima.utils
+import aima.logic
+# The main entry point for this module
+def main():
+    # Create an array to hold clauses
+    clauses = []
+    # Add first-order logic clauses (rules and fact)
+    clauses.append(aima.utils.expr("reads(maria,logic_book)"))
+    clauses.append(aima.utils.expr("author(peter,logic_book)"))
+    clauses.append(aima.utils.expr("girl(x)==>likes(x,shopping)"))
+    clauses.append(aima.utils.expr("likes(girls,shopping)"))
+    # Create a first-order logic knowledge base (KB) with clauses
+    KB = aima.logic.FolKB(clauses)
+    # Get information from the knowledge base with ask (goals)
+    likes_shopping = aima.logic.fol_fc_ask(KB,aima.utils.expr('likes(x,shopping)'))
+    #can_travel = aima.logic.fol_fc_ask(KB,aima.utils.expr('can_travel(x)'))
+    # Print answers
+    print('who likes shopping?')
+    print(list(likes_shopping))
+    print()
+# Tell python to run main method
+if __name__ == "__main__": main()

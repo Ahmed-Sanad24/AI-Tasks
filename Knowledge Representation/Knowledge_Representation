@@ -1,0 +1,34 @@
+import aima.utils
+import aima.logic
+# The main entry point for this module
+def main():
+    # Create an array to hold clauses
+    clauses = []
+    # Add first-order logic clauses (rules and fact)
+
+    #clauses.append(aima.utils.expr("woman(jia)"))
+    #clauses.append(aima.utils.expr("man(john)"))
+    clauses.append(aima.utils.expr("healthy(john)"))
+    clauses.append(aima.utils.expr("healthy(jia)"))
+    clauses.append(aima.utils.expr("healthy(mona)"))
+    clauses.append(aima.utils.expr("wealthy(john)"))
+    clauses.append(aima.utils.expr("wealthy(samir)")) 
+    clauses.append(aima.utils.expr("(healthy(x)&wealthy(x))==>traveler(x)"))
+    clauses.append(aima.utils.expr("traveler(x)==>can_travel(x)"))
+    clauses.append(aima.utils.expr("can_travel(john)"))
+    # Create a first-order logic knowledge base (KB) with clauses
+    KB = aima.logic.FolKB(clauses)
+    # Get information from the knowledge base with ask
+    healthy = aima.logic.fol_fc_ask(KB,aima.utils.expr('healthy(x)'))
+    wealthy = aima.logic.fol_fc_ask(KB,aima.utils.expr('wealthy(x)'))
+    can_travel = aima.logic.fol_fc_ask(KB,aima.utils.expr('can_travel(x)'))
+    # Print answers
+    print('can travel?')
+    print(list(can_travel))
+    print('\nhealthy?')
+    print(list(healthy))
+    print('\nwealthy?')
+    print(list(wealthy))
+    print()
+# Tell python to run main method
+if __name__ == "__main__": main()
